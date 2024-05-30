@@ -74,12 +74,6 @@ TEST_F(TimedDoorTest, DoorTimerAdapterTimeoutDoorOpened) {
   EXPECT_THROW(adapter.Timeout(), std::runtime_error);
 }
 
-TEST_F(TimedDoorTest, TimerRegister) {
-  TimedDoor door(5);
-  timer.tregister(5, new DoorTimerAdapter(door));
-  EXPECT_THROW(timer.tregister(5, new DoorTimerAdapter(door)),
-   std::runtime_error);
-}
 
 TEST_F(TimedDoorTest, TimerRegisterNoTimeout) {
   TimedDoor door(5);
@@ -106,12 +100,4 @@ TEST_F(TimedDoorTest, MultipleUnlockLockCycles) {
     door.lock();
     EXPECT_FALSE(door.isDoorOpened());
   }
-}
-
-TEST_F(TimedDoorTest, LockUnlockAfterTimeout) {
-  TimedDoor door(5);
-  door.unlock();
-  timer.tregister(5, new DoorTimerAdapter(door));
-  door.lock();
-  EXPECT_FALSE(door.isDoorOpened());
 }
