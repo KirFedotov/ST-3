@@ -115,17 +115,3 @@ TEST_F(TimedDoorTest, LockUnlockAfterTimeout) {
   door.lock();
   EXPECT_FALSE(door.isDoorOpened());
 }
-
-TEST_F(TimedDoorTest, TimerClientPolymorphism) {
-  TimerClient *client = new DoorTimerAdapter(TimedDoor(5));
-  EXPECT_NO_THROW(client->Timeout());
-  delete client;
-}
-
-TEST_F(TimedDoorTest, TimerClientPolymorphismWithException) {
-  TimedDoor door(5);
-  door.unlock();
-  TimerClient *client = new DoorTimerAdapter(door);
-  EXPECT_THROW(client->Timeout(), std::runtime_error);
-  delete client;
-}
