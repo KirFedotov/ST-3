@@ -77,7 +77,8 @@ TEST_F(TimedDoorTest, DoorTimerAdapterTimeoutDoorOpened) {
 TEST_F(TimedDoorTest, TimerRegister) {
   TimedDoor door(5);
   timer.tregister(5, new DoorTimerAdapter(door));
-  EXPECT_THROW(timer.tregister(5, new DoorTimerAdapter(door)), std::runtime_error);
+  EXPECT_THROW(timer.tregister(5, new DoorTimerAdapter(door)),
+   std::runtime_error);
 }
 
 TEST_F(TimedDoorTest, TimerRegisterNoTimeout) {
